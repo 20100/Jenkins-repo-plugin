@@ -23,7 +23,7 @@
 		<f:entry title="Group" help="/plugin/repo/help-manifestGroup.html">
 			<f:textbox name="repo.manifestGroup" value="${scm.manifestGroup}" />
 		</f:entry>
-		
+
 		<f:entry title="IgnoreChanges" help="/plugin/repo/help-ignoreChanges.html">
 			<f:textarea name="repo.ignoreProjects" value="${scm.ignoreProjects}" rows="3" />
 		</f:entry>
@@ -34,6 +34,10 @@
 
 		<f:entry title="Repo Url" help="/plugin/repo/help-repoUrl.html">
 			<f:textbox name="repo.repoUrl" value="${scm.repoUrl}" />
+		</f:entry>
+
+		<f:entry title="Repo Branch" help="/plugin/repo/help-repoBranch.html">
+			<f:textbox name="repo.repoBranch" value="${scm.repoBranch}" />
 		</f:entry>
 
 		<f:entry title="Mirror Directory" help="/plugin/repo/help-mirrorDir.html">

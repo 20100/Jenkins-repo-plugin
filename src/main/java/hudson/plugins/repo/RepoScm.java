@@ -103,6 +103,7 @@ public class RepoScm extends SCM implements Serializable {
 	@CheckForNull private boolean showAllChanges;
 	@CheckForNull private boolean noTags;
 	@CheckForNull private Set<String> ignoreProjects;
+	@CheckForNull private String repoBranch;
 
 	/**
 	 * Returns the manifest repository URL.
@@ -184,6 +185,14 @@ public class RepoScm extends SCM implements Serializable {
 		return repoUrl;
 	}
 
+	/**
+	 * Returns the repo branch. by default, this is null and
+	 * repo is fetched from master
+	 */
+	@Exported
+	public String getRepoBranch() {
+		return repoBranch;
+	}
 	/**
 	 * Returns the name of the mirror directory. By default, this is null and
 	 * repo does not use a mirror.
@@ -381,6 +390,7 @@ public class RepoScm extends SCM implements Serializable {
 		showAllChanges = false;
 		noTags = false;
 		ignoreProjects = Collections.<String>emptySet();
+		repoBranch = null;
 	}
 
 	/**
@@ -566,6 +576,18 @@ public class RepoScm extends SCM implements Serializable {
 	@DataBoundSetter
 	public void setRepoUrl(@CheckForNull final String repoUrl) {
 		this.repoUrl = Util.fixEmptyAndTrim(repoUrl);
+	}
+
+	/**
+	 * Set the repo branch.
+	 *
+	 * @param repoBranch
+	 *        If not null then use this branch ,
+	 *        instead of master
+     */
+	@DataBoundSetter
+	public void setRepoBranch(@CheckForNull final String repoBranch) {
+		this.repoBranch = Util.fixEmptyAndTrim(repoBranch);
 	}
 
 	/**
@@ -834,6 +856,9 @@ public class RepoScm extends SCM implements Serializable {
 		if (repoUrl != null) {
 			commands.add("--repo-url=" + env.expand(repoUrl));
 			commands.add("--no-repo-verify");
+		}
+		if (repoBranch != null) {
+			commands.add("--repo-branch=" + env.expand(repoBranch));
 		}
 		if (manifestGroup != null) {
 			commands.add("-g");
